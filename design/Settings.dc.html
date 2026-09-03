@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; }
+    * { box-sizing: border-box; }
+    a { color: #64B5FF; text-decoration: none; }
+    a:hover { color: #9CCEFF; }
+    .press:active { transform: scale(0.97); }
+    @media (prefers-reduced-transparency: reduce) {
+      .glass { backdrop-filter: none !important; background: #161B2E !important; }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1120px; min-height: 820px; overflow: hidden;
+            background: #070A14; font-family: -apple-system, 'SF Pro Text', system-ui, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;">
+
+  <div style="position: absolute; inset: 0;
+              background:
+                radial-gradient(900px 620px at 12% -8%, rgba(88,124,255,0.42), transparent 62%),
+                radial-gradient(760px 560px at 92% 8%, rgba(196,84,255,0.30), transparent 60%),
+                radial-gradient(880px 640px at 72% 104%, rgba(255,138,92,0.24), transparent 62%),
+                linear-gradient(168deg, #0A0E1C 0%, #070A14 60%, #05070F 100%);"></div>
+
+  <!-- the parent view, pushed back and dimmed behind the sheet -->
+  <div style="position: absolute; inset: 0; transform: scale(0.965); transform-origin: 50% 12%;
+              filter: blur(1.5px); opacity: 0.5;">
+    <div style="display: flex; flex-direction: column; gap: 26px; padding: 38px 44px;">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.14);"></div>
+        <div style="width: 190px; height: 15px; border-radius: 5px; background: rgba(255,255,255,0.14);"></div>
+      </div>
+      <div style="height: 176px; border-radius: 26px; background: rgba(255,255,255,0.07);
+                  border: 1px solid rgba(255,255,255,0.12);"></div>
+      <div style="height: 300px; border-radius: 20px; background: rgba(255,255,255,0.055);
+                  border: 1px solid rgba(255,255,255,0.10);"></div>
+    </div>
+  </div>
+  <div style="position: absolute; inset: 0; background: rgba(4,6,12,0.52);"></div>
+
+  <!-- the sheet -->
+  <div style="position: absolute; left: 50%; top: 52px; transform: translateX(-50%); width: 620px;">
+    <div class="glass" style="display: flex; flex-direction: column; border-radius: 26px; overflow: hidden;
+                background: rgba(28,34,54,0.72);
+                backdrop-filter: blur(56px) saturate(190%);
+                -webkit-backdrop-filter: blur(56px) saturate(190%);
+                border: 1px solid rgba(255,255,255,0.16);
+                box-shadow: 0 46px 100px rgba(0,0,0,0.68), inset 0 1px 0 rgba(255,255,255,0.26);">
+
+      <div style="display: flex; align-items: center; gap: 12px; padding: 22px 26px 18px;">
+        <div style="font-size: 19px; font-weight: 600; letter-spacing: -0.02em;
+                    color: rgba(255,255,255,0.96); flex-grow: 1;">Settings</div>
+        <button class="press" style="display: flex; align-items: center; justify-content: center;
+                    width: 28px; height: 28px; padding: 0; cursor: pointer; border-radius: 999px;
+                    background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.78)"
+               stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+
+      <div style="height: 1px; background: rgba(255,255,255,0.10);"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 22px; padding: 24px 26px 26px;">
+
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <label style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                        color: rgba(226,234,255,0.46);">Transcription model</label>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 13px;
+                      background: rgba(255,255,255,0.075); border: 1px solid rgba(255,255,255,0.14);">
+            <span style="font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.94); flex-grow: 1;">small</span>
+            <span style="font-size: 12.5px; color: rgba(226,234,255,0.46);">≈ 4–5× realtime on CPU</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(226,234,255,0.54)"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 10l4-4 4 4"></path><path d="M16 14l-4 4-4-4"></path>
+            </svg>
+          </div>
+          <div style="display: flex; gap: 7px;">
+            <span style="padding: 4px 10px; border-radius: 7px; font-size: 11.5px; color: rgba(226,234,255,0.44);
+                         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">tiny</span>
+            <span style="padding: 4px 10px; border-radius: 7px; font-size: 11.5px; color: rgba(226,234,255,0.44);
+                         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">base</span>
+            <span style="padding: 4px 10px; border-radius: 7px; font-size: 11.5px; font-weight: 600; color: #8AC2FF;
+                         background: rgba(10,132,255,0.16); border: 1px solid rgba(10,132,255,0.32);">small</span>
+            <span style="padding: 4px 10px; border-radius: 7px; font-size: 11.5px; color: rgba(226,234,255,0.44);
+                         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">medium</span>
+            <span style="padding: 4px 10px; border-radius: 7px; font-size: 11.5px; color: rgba(226,234,255,0.44);
+                         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">large-v3</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <label style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                        color: rgba(226,234,255,0.46);">Summarization model · Ollama</label>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 13px;
+                      background: rgba(255,255,255,0.075); border: 1px solid rgba(255,255,255,0.14);">
+            <span style="width: 7px; height: 7px; border-radius: 999px; background: #4BE07B;
+                         box-shadow: 0 0 9px rgba(75,224,123,0.8); flex-shrink: 0;"></span>
+            <span style="font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.94); flex-grow: 1;
+                         font-family: ui-monospace, 'SF Mono', Menlo, monospace;">qwen3:4b</span>
+            <span style="font-size: 12.5px; color: rgba(226,234,255,0.46);">3 installed</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(226,234,255,0.54)"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 10l4-4 4 4"></path><path d="M16 14l-4 4-4-4"></path>
+            </svg>
+          </div>
+          <div style="font-size: 12.5px; line-height: 1.45; color: rgba(226,234,255,0.42);">
+            Smaller models are faster but lose the minutes format — qwen3:0.6b echoes the template instead of following it.
+          </div>
+        </div>
+
+        <div style="height: 1px; background: rgba(255,255,255,0.09);"></div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <label style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                          color: rgba(226,234,255,0.46);">Microphone</label>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 13px;
+                        background: rgba(255,255,255,0.075); border: 1px solid rgba(255,255,255,0.14);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7FBBFF" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path>
+              </svg>
+              <span style="font-size: 13.5px; color: rgba(255,255,255,0.90); overflow: hidden;
+                           text-overflow: ellipsis; white-space: nowrap;">Microphone Array</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <label style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                          color: rgba(226,234,255,0.46);">System audio</label>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; border-radius: 13px;
+                        background: rgba(255,255,255,0.075); border: 1px solid rgba(255,255,255,0.14);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C79CFF" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+                <path d="M4 9v6h4l5 4V5L8 9H4z"></path><path d="M17.5 8.5a5 5 0 0 1 0 7"></path>
+              </svg>
+              <span style="font-size: 13.5px; color: rgba(255,255,255,0.90); overflow: hidden;
+                           text-overflow: ellipsis; white-space: nowrap;">Speakers [Loopback]</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 9px;">
+          <label style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                        color: rgba(226,234,255,0.46);">Meetings folder</label>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 13px;
+                      background: rgba(255,255,255,0.075); border: 1px solid rgba(255,255,255,0.14);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(226,234,255,0.60)"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+              <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path>
+            </svg>
+            <span style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px;
+                         color: rgba(255,255,255,0.88); flex-grow: 1;">meetings</span>
+            <button class="press" style="padding: 5px 12px; cursor: pointer; border-radius: 8px; font: inherit;
+                        font-size: 12.5px; color: rgba(255,255,255,0.80); background: rgba(255,255,255,0.09);
+                        border: 1px solid rgba(255,255,255,0.14);">Choose…</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 1px; background: rgba(255,255,255,0.10);"></div>
+
+      <div style="display: flex; align-items: center; gap: 10px; padding: 18px 26px;">
+        <span style="font-size: 12.5px; color: rgba(226,234,255,0.40); flex-grow: 1;">
+          Model weights download once, then never again.
+        </span>
+        <button class="press" style="padding: 9px 18px; cursor: pointer; border-radius: 11px; font: inherit;
+                    font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.82);
+                    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);">Cancel</button>
+        <button class="press" style="padding: 9px 20px; cursor: pointer; border-radius: 11px; font: inherit;
+                    font-size: 13.5px; font-weight: 600; letter-spacing: -0.004em; color: #fff;
+                    background: linear-gradient(180deg, #3B9BFF, #0A6FE0);
+                    border: 1px solid rgba(255,255,255,0.20);
+                    box-shadow: 0 8px 22px rgba(10,111,224,0.40), inset 0 1px 0 rgba(255,255,255,0.28);">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

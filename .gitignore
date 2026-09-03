@@ -1,0 +1,11 @@
+# Meeting recordings are private and never leave this machine.
+meetings/
+settings.json
+
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Seeded design canvas: 2.5MB build artifact, re-seeded from the .dc.html sources.
+design/meetingai-glass-redesign.html

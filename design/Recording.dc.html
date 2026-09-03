@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; }
+    * { box-sizing: border-box; }
+    a { color: #64B5FF; text-decoration: none; }
+    a:hover { color: #9CCEFF; }
+    .press:active { transform: scale(0.97); }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .rec-dot { animation: pulse 2s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .rec-dot { animation: none; } }
+    @media (prefers-reduced-transparency: reduce) {
+      .glass { backdrop-filter: none !important; background: #161B2E !important; }
+    }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1120px; min-height: 820px; overflow: hidden;
+            background: #070A14; font-family: -apple-system, 'SF Pro Text', system-ui, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;">
+
+  <div style="position: absolute; inset: 0;
+              background:
+                radial-gradient(900px 620px at 12% -8%, rgba(255,88,76,0.30), transparent 62%),
+                radial-gradient(760px 560px at 92% 8%, rgba(196,84,255,0.24), transparent 60%),
+                radial-gradient(880px 640px at 72% 104%, rgba(255,138,92,0.22), transparent 62%),
+                linear-gradient(168deg, #0C0A16 0%, #08070F 60%, #05060C 100%);"></div>
+  <div style="position: absolute; inset: 0; opacity: 0.30; mix-blend-mode: overlay;
+              background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='0.5'/></svg>&quot;);"></div>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 26px; padding: 38px 44px 40px;">
+
+    <!-- header -->
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <div style="display: flex; align-items: center; justify-content: center;
+                  width: 34px; height: 34px; border-radius: 10px;
+                  background: linear-gradient(150deg, rgba(255,255,255,0.26), rgba(255,255,255,0.06));
+                  border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 6px 18px rgba(0,0,0,0.40);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.94)"
+             stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="2" width="6" height="12" rx="3"></rect>
+          <path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v4"></path>
+        </svg>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1px; flex-grow: 1;">
+        <div style="font-size: 19px; font-weight: 600; letter-spacing: -0.021em; color: rgba(255,255,255,0.96);">MeetingAI</div>
+        <div style="font-size: 12.5px; color: rgba(226,234,255,0.50);">Records your mic and everything you hear</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; padding: 6px 13px 6px 11px;
+                  border-radius: 999px; background: rgba(255,69,58,0.15);
+                  border: 1px solid rgba(255,69,58,0.34);">
+        <span class="rec-dot" style="width: 8px; height: 8px; border-radius: 999px; background: #FF453A;
+                     box-shadow: 0 0 12px rgba(255,69,58,0.9);"></span>
+        <span style="font-size: 12px; font-weight: 550; color: #FF8B84;">Recording</span>
+      </div>
+    </div>
+
+    <!-- primary surface: recording -->
+    <div class="glass" style="display: flex; flex-direction: column; gap: 26px; padding: 34px;
+                border-radius: 26px; background: rgba(255,255,255,0.075);
+                backdrop-filter: blur(44px) saturate(185%);
+                -webkit-backdrop-filter: blur(44px) saturate(185%);
+                border: 1px solid rgba(255,255,255,0.15);
+                box-shadow: 0 32px 74px rgba(0,0,0,0.52), inset 0 1px 0 rgba(255,255,255,0.24);">
+
+      <div style="display: flex; align-items: center; gap: 30px;">
+        <button class="press" style="display: flex; align-items: center; justify-content: center;
+                    width: 96px; height: 96px; flex-shrink: 0; padding: 0; cursor: pointer;
+                    border-radius: 999px; border: 1px solid rgba(255,255,255,0.22);
+                    background: rgba(255,255,255,0.10);
+                    box-shadow: 0 14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.28);">
+          <span style="width: 30px; height: 30px; border-radius: 8px; background: #FF453A;
+                       box-shadow: 0 0 22px rgba(255,69,58,0.55);"></span>
+        </button>
+
+        <div style="display: flex; flex-direction: column; gap: 6px; flex-grow: 1;">
+          <div style="font-size: 62px; font-weight: 600; letter-spacing: -0.035em; line-height: 1;
+                      font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.98);">12:04</div>
+          <div style="font-size: 14px; color: rgba(226,234,255,0.58);">
+            Started 18:06 · transcribing as it goes
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 7px; align-items: flex-end;">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+                      color: rgba(226,234,255,0.44);">Transcribed</div>
+          <div style="font-size: 26px; font-weight: 600; letter-spacing: -0.02em;
+                      font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.94);">11<span style="color: rgba(226,234,255,0.40);"> / 12</span></div>
+          <div style="width: 132px; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.12); overflow: hidden;">
+            <div style="width: 92%; height: 100%; border-radius: 999px;
+                        background: linear-gradient(90deg, #0A84FF, #64D2FF);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- the two channels, kept visibly separate -->
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; border-radius: 18px;
+                    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FBBFF"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path>
+            </svg>
+            <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.006em; color: rgba(255,255,255,0.90);">You</span>
+            <span style="font-size: 12px; color: rgba(226,234,255,0.40); flex-grow: 1;">Microphone Array</span>
+            <span style="font-size: 11.5px; font-variant-numeric: tabular-nums; color: rgba(226,234,255,0.46);">−24 dB</span>
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 3px; height: 40px;">
+            <span style="flex-grow: 1; height: 22%; border-radius: 2px; background: rgba(127,187,255,0.55);"></span>
+            <span style="flex-grow: 1; height: 46%; border-radius: 2px; background: rgba(127,187,255,0.62);"></span>
+            <span style="flex-grow: 1; height: 71%; border-radius: 2px; background: rgba(127,187,255,0.75);"></span>
+            <span style="flex-grow: 1; height: 38%; border-radius: 2px; background: rgba(127,187,255,0.60);"></span>
+            <span style="flex-grow: 1; height: 88%; border-radius: 2px; background: rgba(127,187,255,0.88);"></span>
+            <span style="flex-grow: 1; height: 54%; border-radius: 2px; background: rgba(127,187,255,0.66);"></span>
+            <span style="flex-grow: 1; height: 30%; border-radius: 2px; background: rgba(127,187,255,0.56);"></span>
+            <span style="flex-grow: 1; height: 63%; border-radius: 2px; background: rgba(127,187,255,0.70);"></span>
+            <span style="flex-grow: 1; height: 41%; border-radius: 2px; background: rgba(127,187,255,0.60);"></span>
+            <span style="flex-grow: 1; height: 76%; border-radius: 2px; background: rgba(127,187,255,0.80);"></span>
+            <span style="flex-grow: 1; height: 33%; border-radius: 2px; background: rgba(127,187,255,0.58);"></span>
+            <span style="flex-grow: 1; height: 58%; border-radius: 2px; background: rgba(127,187,255,0.68);"></span>
+            <span style="flex-grow: 1; height: 26%; border-radius: 2px; background: rgba(127,187,255,0.54);"></span>
+            <span style="flex-grow: 1; height: 49%; border-radius: 2px; background: rgba(127,187,255,0.64);"></span>
+            <span style="flex-grow: 1; height: 18%; border-radius: 2px; background: rgba(127,187,255,0.50);"></span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; border-radius: 18px;
+                    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C79CFF"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 9v6h4l5 4V5L8 9H4z"></path><path d="M17.5 8.5a5 5 0 0 1 0 7"></path>
+            </svg>
+            <span style="font-size: 13.5px; font-weight: 600; letter-spacing: -0.006em; color: rgba(255,255,255,0.90);">Them</span>
+            <span style="font-size: 12px; color: rgba(226,234,255,0.40); flex-grow: 1;">Speakers [Loopback]</span>
+            <span style="font-size: 11.5px; font-variant-numeric: tabular-nums; color: rgba(226,234,255,0.46);">−12 dB</span>
+          </div>
+          <div style="display: flex; align-items: flex-end; gap: 3px; height: 40px;">
+            <span style="flex-grow: 1; height: 58%; border-radius: 2px; background: rgba(199,156,255,0.66);"></span>
+            <span style="flex-grow: 1; height: 82%; border-radius: 2px; background: rgba(199,156,255,0.84);"></span>
+            <span style="flex-grow: 1; height: 44%; border-radius: 2px; background: rgba(199,156,255,0.60);"></span>
+            <span style="flex-grow: 1; height: 96%; border-radius: 2px; background: rgba(199,156,255,0.94);"></span>
+            <span style="flex-grow: 1; height: 62%; border-radius: 2px; background: rgba(199,156,255,0.70);"></span>
+            <span style="flex-grow: 1; height: 88%; border-radius: 2px; background: rgba(199,156,255,0.88);"></span>
+            <span style="flex-grow: 1; height: 51%; border-radius: 2px; background: rgba(199,156,255,0.64);"></span>
+            <span style="flex-grow: 1; height: 73%; border-radius: 2px; background: rgba(199,156,255,0.78);"></span>
+            <span style="flex-grow: 1; height: 39%; border-radius: 2px; background: rgba(199,156,255,0.58);"></span>
+            <span style="flex-grow: 1; height: 67%; border-radius: 2px; background: rgba(199,156,255,0.72);"></span>
+            <span style="flex-grow: 1; height: 91%; border-radius: 2px; background: rgba(199,156,255,0.90);"></span>
+            <span style="flex-grow: 1; height: 47%; border-radius: 2px; background: rgba(199,156,255,0.62);"></span>
+            <span style="flex-grow: 1; height: 78%; border-radius: 2px; background: rgba(199,156,255,0.80);"></span>
+            <span style="flex-grow: 1; height: 55%; border-radius: 2px; background: rgba(199,156,255,0.66);"></span>
+            <span style="flex-grow: 1; height: 34%; border-radius: 2px; background: rgba(199,156,255,0.56);"></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="press" style="display: flex; align-items: center; justify-content: center; gap: 10px;
+                  padding: 15px; cursor: pointer; border-radius: 15px; font: inherit;
+                  font-size: 15.5px; font-weight: 600; letter-spacing: -0.008em; color: #fff;
+                  background: linear-gradient(180deg, rgba(255,69,58,0.94), rgba(214,42,32,0.94));
+                  border: 1px solid rgba(255,255,255,0.18);
+                  box-shadow: 0 12px 30px rgba(232,52,42,0.34), inset 0 1px 0 rgba(255,255,255,0.26);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="6" width="12" height="12" rx="2.5"></rect>
+        </svg>
+        Stop and write minutes
+      </button>
+    </div>
+
+    <!-- what happens on stop -->
+    <div style="display: flex; align-items: center; gap: 12px; padding: 15px 20px; border-radius: 16px;
+                background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.085);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(226,234,255,0.46)"
+           stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>
+      </svg>
+      <span style="font-size: 13px; color: rgba(226,234,255,0.54); flex-grow: 1;">
+        Transcription is keeping pace with the recording, so stopping takes seconds — not the length of the meeting.
+      </span>
+      <span style="font-size: 12.5px; font-variant-numeric: tabular-nums; color: rgba(226,234,255,0.40);">small · qwen3:4b</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

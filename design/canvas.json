@@ -1,0 +1,27 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",       "x": 0,    "y": 0,    "w": 1120, "h": 820, "title": "Idle · history" },
+    { "file": "Recording.dc.html",  "x": 1200, "y": 0,    "w": 1120, "h": 820, "title": "Recording" },
+    { "file": "Processing.dc.html", "x": 2400, "y": 0,    "w": 1120, "h": 820, "title": "After stop" },
+    { "file": "Minutes.dc.html",    "x": 0,    "y": 940,  "w": 1120, "h": 820, "title": "Minutes" },
+    { "file": "Transcript.dc.html", "x": 1200, "y": 940,  "w": 1120, "h": 820, "title": "Transcript · no minutes" },
+    { "file": "Settings.dc.html",   "x": 2400, "y": 940,  "w": 1120, "h": 820, "title": "Settings sheet" }
+  ],
+  "annotations": [
+    {
+      "id": "direction",
+      "x": 0,
+      "y": -150,
+      "w": 640,
+      "text": "Glass over an ambient ground.\nThe blur needs colour behind it to read as a material, so the wallpaper gradient is doing real work — flatten it and the glass dies."
+    },
+    {
+      "id": "channels",
+      "x": 1200,
+      "y": -150,
+      "w": 520,
+      "text": "You / Them are the two capture channels, colour-coded blue and violet everywhere they appear — meters, transcript chips, action-item owners."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

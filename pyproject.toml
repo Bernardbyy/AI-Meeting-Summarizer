@@ -1,0 +1,20 @@
+[project]
+name = "meetingai"
+version = "0.1.0"
+description = "Fully offline meeting recorder, transcriber and minute-taker"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.141.1",
+    "faster-whisper>=1.2.1",
+    "pyaudiowpatch>=0.2.12.8",
+    "uvicorn>=0.52.4",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
