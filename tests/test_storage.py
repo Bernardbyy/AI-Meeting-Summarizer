@@ -30,6 +30,16 @@ def test_same_minute_meetings_do_not_collide(meetings_dir):
     assert a != b and (meetings_dir / b).is_dir()
 
 
+def test_same_minute_untitled_meetings_do_not_collide(meetings_dir):
+    """The app always creates untitled meetings, so this is the real path."""
+    a, b, c = storage.new_meeting(), storage.new_meeting(), storage.new_meeting()
+    assert len({a, b, c}) == 3
+    for mid in (a, b, c):
+        assert storage._ID_RE.match(mid), f"generated an id it will later reject: {mid}"
+        assert (meetings_dir / mid).is_dir()
+        storage.read_meta(mid)          # must be addressable, not just on disk
+
+
 def test_list_is_newest_first_and_flags_artifacts(meetings_dir):
     old = storage.new_meeting("old")
     new = storage.new_meeting("new")

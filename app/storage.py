@@ -48,10 +48,12 @@ def new_meeting(title: str = "") -> str:
     slug = _slug(title)
     meeting_id = f"{stamp}_{slug}" if slug else stamp
 
-    # Two meetings in the same minute would collide.
-    base, n = meeting_id, 2
+    # Two meetings in the same minute would collide. The counter has to land
+    # inside the slug: an id this function generates must still satisfy _ID_RE,
+    # or every later lookup of it is refused as malformed.
+    n = 2
     while (MEETINGS_DIR / meeting_id).exists():
-        meeting_id = f"{base}-{n}"
+        meeting_id = f"{stamp}_{slug}-{n}" if slug else f"{stamp}_{n}"
         n += 1
 
     d = MEETINGS_DIR / meeting_id

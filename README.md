@@ -39,7 +39,7 @@ The Whisper model downloads on first use (~460MB for `small`), then never again.
 ```bash
 uv sync                                  # setup only
 uv run uvicorn app.main:app --port 8756  # run without the .bat
-uv run pytest                            # 63 tests, no devices or Ollama needed
+uv run pytest                            # 86 tests, no devices or Ollama needed
 ```
 
 ## How it works

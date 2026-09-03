@@ -71,12 +71,16 @@ class Session:
         text = transcribe.format_transcript(self.segments)
         (self.dir / "transcript.txt").write_text(text, encoding="utf-8")
 
+        # Everything from here down is best-effort: the transcript is already on
+        # disk, so no later failure may take the meeting with it.
         self._set_stage("saving")
-        audio_path = audio.build_audio(self.dir, chunks.get("mic", []),
-                                       chunks.get("sys", []))
+        audio_path = None
+        try:
+            audio_path = audio.build_audio(self.dir, chunks.get("mic", []),
+                                           chunks.get("sys", []))
+        except Exception as e:  # ffmpeg missing, killed, or fed a torn chunk
+            self.errors.append(f"could not build audio.wav: {e}")
 
-        # The transcript is already safe on disk, so a failure here costs the
-        # minutes, never the meeting.
         self._set_stage("summarizing")
         minutes = ""
         try:

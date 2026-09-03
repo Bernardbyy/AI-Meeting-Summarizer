@@ -200,3 +200,28 @@ def test_stage_clock_restarts_on_each_stage(meeting, monkeypatch):
     s.recorder.emit("mic", 60)
     s.stop()
     assert s.status()["stage_sec"] < 5
+
+
+def test_a_failed_mixdown_still_leaves_minutes(meeting, monkeypatch):
+    """ffmpeg dying must cost the audio file, not the minutes.
+
+    The transcript is on disk before the mixdown runs, so there is no reason a
+    broken ffmpeg should also deny you the summary.
+    """
+    monkeypatch.setattr(transcribe, "transcribe_chunk", stub_transcribe([]))
+
+    def ffmpeg_died(meeting_dir, mic, sys_):
+        raise RuntimeError("ffmpeg failed: Invalid data found when processing input")
+
+    monkeypatch.setattr(audio, "build_audio", ffmpeg_died)
+
+    s = session.Session(meeting, recorder=FakeRecorder(storage.meeting_dir(meeting)))
+    s.start()
+    s.recorder.emit("mic", 60)
+    result = s.stop()
+
+    assert result["audio"] is None
+    assert any("ffmpeg" in e for e in result["errors"])
+    assert result["minutes"], "minutes must still be written when only the mixdown failed"
+    assert (storage.meeting_dir(meeting) / "minutes.md").exists()
+    assert (storage.meeting_dir(meeting) / "transcript.txt").exists()
