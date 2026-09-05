@@ -20,7 +20,7 @@ Confirmed 2026-09-02.
 - Summarization by a local LLM. No network calls anywhere in the pipeline.
 - Transcription runs in the background *during* recording (~60s chunks, no live text shown), so only summarization is left when Stop is pressed.
 - Progress UI shows real stages (recording / transcribing N of M chunks / summarizing), not a spinner.
-- Summarization is a single prompt over the full transcript. Known ceiling: fine to ~30-40 min meetings; a 2h transcript (~25-30k tokens) will overflow context or ingest very slowly on CPU. Chunked map-reduce is the upgrade path, deliberately deferred.
+- Summarization batches long meetings (split, digest, combine) so nothing is dropped, whatever the meeting's length. Delivered 2026-09-05, replacing the original single-prompt shortcut.
 
 ## Out of scope (MVP)
 
@@ -35,4 +35,3 @@ Confirmed 2026-09-02.
 
 - Speaker diarization
 - Live transcription (showing text on screen during the meeting)
-- Chunked map-reduce summarization, for long meetings

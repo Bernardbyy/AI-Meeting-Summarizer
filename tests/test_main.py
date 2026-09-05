@@ -53,7 +53,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(audio, "build_audio", lambda d, m, s: Path(d) / "audio.wav")
     monkeypatch.setattr(audio, "Recorder", FakeRecorder)
     monkeypatch.setattr(summarize, "summarize",
-                        lambda text, model=None: "## Summary\n\nstub minutes\n")
+                        lambda text, model=None, **kw: "## Summary\n\nstub minutes\n")
     monkeypatch.setattr(summarize, "list_models", lambda: ["qwen3:4b", "qwen3:0.6b"])
     monkeypatch.setattr(transcribe, "transcribe_chunk",
                         lambda p, ch, off=0.0, **kw: [

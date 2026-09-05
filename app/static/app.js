@@ -132,7 +132,8 @@ function stepValue(key, s, state) {
   if (key === "recording" && (state === "rec" || state === "done") && s.elapsed_sec)
     return mmss(s.elapsed_sec);
   if (key === "transcribing" && s.closed) return `${s.transcribed}/${s.closed} chunks`;
-  if (key === "summarizing" && state === "now") return s.models.llm || "";
+  if (key === "summarizing" && state === "now")
+    return s.batches > 1 ? `batch ${s.batch}/${s.batches}` : (s.models.llm || "");
   if (key === "ready" && state === "done") return "saved";
   if (state === "now" && s.stage_sec) return mmss(s.stage_sec);
   return "";
@@ -166,7 +167,9 @@ async function refreshStatus() {
     finishing: ["Closing the recording", "Waiting for the last chunk of audio to be written."],
     transcribing: ["Transcribing", "Working through the chunks that were still in the queue when you stopped."],
     saving: ["Saving audio", "Mixing both channels into one file — you on the left, them on the right."],
-    summarizing: ["Writing the minutes", `${s.models.llm || "The model"} is reading the whole transcript. This is the slow part on a CPU.`],
+    summarizing: ["Writing the minutes", s.batches > 1
+      ? `Long meeting — summarizing it in ${s.batches} batches so nothing is left out. Batch ${s.batch} of ${s.batches}.`
+      : `${s.models.llm || "The model"} is reading the whole transcript. This is the slow part on a CPU.`],
   };
 
   $("deck-title").className = `deck-title${recording ? " timer" : ""}`;

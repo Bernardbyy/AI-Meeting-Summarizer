@@ -22,7 +22,7 @@ settings.apply()
 CURRENT: session.Session | None = None
 
 IDLE = {"stage": "idle", "meeting_id": None, "elapsed_sec": 0, "stage_sec": 0,
-        "closed": 0, "transcribed": 0, "devices": {},
+        "closed": 0, "transcribed": 0, "batch": 0, "batches": 0, "devices": {},
         "models": {}, "errors": []}
 
 

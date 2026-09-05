@@ -39,7 +39,7 @@ The Whisper model downloads on first use (~460MB for `small`), then never again.
 ```bash
 uv sync                                  # setup only
 uv run uvicorn app.main:app --port 8756  # run without the .bat
-uv run pytest                            # 86 tests, no devices or Ollama needed
+uv run pytest                            # 106 tests, no devices or Ollama needed
 ```
 
 ## How it works
@@ -75,9 +75,14 @@ Two things worth knowing:
 
 - **Use headphones.** On speakers the microphone re-hears the system audio, so
   both channels transcribe the same words and the minutes see everything twice.
-- **Summarization is a single prompt** over the whole transcript, which holds to
-  roughly 30-40 minutes of meeting. Past that the earliest part is dropped and
-  the minutes say so. Chunked map-reduce is the planned fix.
+- **Long meetings are summarized in batches.** Past roughly 40 minutes the
+  transcript is split on line boundaries, each part is digested separately, and
+  the digests are combined into the minutes. Every line reaches the model —
+  nothing is dropped. Batches run one at a time, because on CPU a single request
+  already uses every core.
+- **It is slow, and that is the model, not the pipeline.** Generation runs about
+  7 tokens/sec and prompt reading about 24-40 tokens/sec on a 16GB CPU machine,
+  so expect several minutes after Stop. A smaller model trades quality for speed.
 
 ## Layout
 

@@ -48,7 +48,7 @@ def meeting(tmp_path, monkeypatch):
     monkeypatch.setattr(audio, "build_audio", lambda d, m, s: Path(d) / "audio.wav")
     # Never reach a real LLM from the test suite.
     monkeypatch.setattr(summarize, "summarize",
-                        lambda text, model=None: "## Summary\n\nstub minutes\n")
+                        lambda text, model=None, **kw: "## Summary\n\nstub minutes\n")
     return storage.new_meeting("worker test")
 
 
@@ -162,7 +162,7 @@ def test_minutes_are_written(meeting, monkeypatch):
 def test_a_dead_llm_costs_the_minutes_not_the_meeting(meeting, monkeypatch):
     monkeypatch.setattr(transcribe, "transcribe_chunk", stub_transcribe([]))
 
-    def down(text, model=None):
+    def down(text, model=None, **kw):
         raise summarize.SummarizeError("Could not reach Ollama. Is it running?")
 
     monkeypatch.setattr(summarize, "summarize", down)

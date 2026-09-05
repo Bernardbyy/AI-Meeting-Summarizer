@@ -40,6 +40,9 @@ class Session:
         self.errors: list[str] = []
         self._offsets = {"mic": 0.0, "sys": 0.0}
         self._worker: threading.Thread | None = None
+        # Long meetings are summarized in batches; the UI counts them.
+        self.batch = 0
+        self.batches = 0
 
     # --- lifecycle -----------------------------------------------------
 
@@ -84,7 +87,8 @@ class Session:
         self._set_stage("summarizing")
         minutes = ""
         try:
-            minutes = summarize.summarize(text, model=self.llm_model)
+            minutes = summarize.summarize(text, model=self.llm_model,
+                                          progress=self._on_batch)
             (self.dir / "minutes.md").write_text(minutes, encoding="utf-8")
         except summarize.SummarizeError as e:
             self.errors.append(str(e))
@@ -115,6 +119,9 @@ class Session:
             finally:
                 self.transcribed += 1
 
+    def _on_batch(self, done: int, total: int):
+        self.batch, self.batches = done, total
+
     def _transcribe(self, path: Path, channel: str):
         if not path.exists() or path.stat().st_size < MIN_CHUNK_BYTES:
             return
@@ -135,6 +142,8 @@ class Session:
             "stage_sec": int(time.time() - self.stage_since),
             "closed": self.recorder.closed_count,
             "transcribed": self.transcribed,
+            "batch": self.batch,
+            "batches": self.batches,
             "devices": self.devices,
             "models": {"whisper": self.model_name, "llm": self.llm_model},
             "errors": self.errors + self.recorder.errors,

@@ -70,23 +70,22 @@ def test_empty_transcript_never_calls_the_model():
     assert "No speech" in out
 
 
-def test_long_transcript_is_trimmed_from_the_head_with_a_note():
-    seen = []
-    # Every line unique, so "kept" and "dropped" are unambiguous.
-    transcript = "".join(
-        f"[00:00:01] Them: line {i} " + "filler " * 15 + "\n" for i in range(4000)
-    )
-    out = summarize.summarize(transcript, post=stub(capture=seen))
-
-    sent = seen[0][1]["prompt"]
-    assert len(sent) < len(transcript)
-    assert "line 3999 " in sent      # the end is what we keep
-    assert "line 0 " not in sent     # the head is what we drop
-    assert out.startswith("> **Note:**") and "left out" in out
-
-
 def test_short_transcript_has_no_note():
     out = summarize.summarize("[00:00:01] You: quick chat", post=stub())
+    assert not out.startswith("> **Note:**")
+
+
+def test_a_long_transcript_is_batched_rather_than_trimmed():
+    """Superseded test_long_transcript_is_trimmed_from_the_head_with_a_note:
+    long meetings are now split and digested, so nothing is left out."""
+    seen = []
+    line = "[00:00:01] Them: line {} " + "filler " * 15
+    transcript = "\n".join(line.format(i) for i in range(4000))
+    out = summarize.summarize(transcript, post=stub(capture=seen))
+
+    assert len(seen) > 2, "must be batched, not sent as one prompt"
+    sent = "\n".join(payload["prompt"] for _path, payload in seen)
+    assert "line 0 " in sent and "line 3999 " in sent
     assert not out.startswith("> **Note:**")
 
 
