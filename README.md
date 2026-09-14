@@ -20,25 +20,73 @@ meetings/2026-09-02_1806/
 
 Delete the folder and the meeting is gone, audio included.
 
-## Requirements
+## Setup
 
-- Windows (capture uses WASAPI loopback)
-- [uv](https://docs.astral.sh/uv/) — provisions Python 3.11 itself
-- [Ollama](https://ollama.com/) with a model pulled: `ollama pull qwen3:4b`
-- `ffmpeg` on PATH
+Windows only — audio capture uses WASAPI loopback. Run these in PowerShell.
 
-## Run it
+**1. Install the tools**
 
+```powershell
+winget install --id Git.Git -e
+winget install --id astral-sh.uv -e
+winget install --id Gyan.FFmpeg -e
+winget install --id Ollama.Ollama -e
+winget install --id GitHub.cli -e
 ```
-run.bat
+
+**2. Close and reopen PowerShell** so the new tools are on PATH.
+
+**3. Sign in to GitHub** (the repository is private)
+
+```powershell
+gh auth login
 ```
 
-That syncs dependencies, starts the server on port 8756 and opens your browser.
-The Whisper model downloads on first use (~460MB for `small`), then never again.
+**4. Get the code**
 
-```bash
-uv sync                                  # setup only
-uv run uvicorn app.main:app --port 8756  # run without the .bat
+```powershell
+gh repo clone Bernardbyy/AI-Meeting-Summarizer
+cd AI-Meeting-Summarizer
+```
+
+**5. Download the summarization model** (2.6GB, one time)
+
+```powershell
+ollama pull qwen3:4b
+```
+
+**6. Run it**
+
+```powershell
+.\run.bat
+```
+
+`run.bat` installs Python 3.11 and the dependencies, starts the server on port
+8756 and opens your browser. After the first time, just double-click it.
+
+### What to expect the first time
+
+- **Starting takes a minute.** The first `run.bat` downloads Python and the
+  packages before the browser opens.
+- **Your first recording looks frozen for a few minutes.** Pressing Record
+  downloads the transcription model (~460MB for `small`) and nothing on screen
+  shows it. Do one short test recording before relying on it in a real meeting.
+- **Use headphones** (see below).
+
+### Moving from another machine
+
+A fresh clone has all the code, but not:
+
+- **Past meetings** — `meetings/` is never committed, because recordings are
+  private. Copy the folder across by hand if you want them.
+- **Your settings** — `settings.json` is not committed either. The app starts
+  with the defaults (`small` and `qwen3:4b`); reselect your models in Settings.
+
+### For development
+
+```powershell
+uv sync                                  # dependencies only
+uv run uvicorn app.main:app --port 8756  # run without run.bat
 uv run pytest                            # 106 tests, no devices or Ollama needed
 ```
 
