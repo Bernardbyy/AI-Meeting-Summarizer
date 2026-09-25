@@ -9,3 +9,5 @@ __pycache__/
 
 # Seeded design canvas: 2.5MB build artifact, re-seeded from the .dc.html sources.
 design/meetingai-glass-redesign.html
+
+brag/
