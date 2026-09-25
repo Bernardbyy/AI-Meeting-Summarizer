@@ -1,0 +1,3 @@
+# cmd.exe misreads labels (goto/call) in LF-only batch files, and the
+# one-line install downloads install.bat raw from GitHub. Store as-is, CRLF.
+*.bat -text
